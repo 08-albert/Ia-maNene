@@ -1,0 +1,11 @@
+package com.sda.rideshare.configs;
+
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+
+@Configuration
+@EntityScan("com.sda.rideshare")
+@EnableJpaRepositories("com.sda.rideshare.repository")
+public class DataBaseConfig {
+}
