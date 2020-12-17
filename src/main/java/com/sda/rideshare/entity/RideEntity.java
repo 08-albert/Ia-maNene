@@ -17,12 +17,16 @@ public class RideEntity {
     private UserEntity user;
 
     @OneToOne
-    @JoinColumn(name ="addressIdDepartures")
+    @JoinColumn(name ="addressIdDepartures" ,referencedColumnName = "addressId")
     private AddressEntity departureAddress;
 
+
     @OneToOne
-    @JoinColumn(name ="addressIdArrival")
+    @JoinColumn(name ="addressIdArrival",referencedColumnName = "addressId")
     private AddressEntity arrivalAddress;
+
+    public RideEntity() {
+    }
 
     public AddressEntity getDepartureAddress() {
         return departureAddress;

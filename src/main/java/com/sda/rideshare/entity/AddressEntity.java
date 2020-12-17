@@ -9,8 +9,8 @@ public class AddressEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer addressId;
     private String city;
-    private String street;
-    private Integer number;
+    private String streetAndNumber;
+
 
     @OneToOne(mappedBy = "departureAddress")
     private RideEntity rideBeginning;
@@ -52,20 +52,12 @@ public class AddressEntity {
         this.city = city;
     }
 
-    public String getStreet() {
-        return street;
+    public String getStreetAndNumber() {
+        return streetAndNumber;
     }
 
-    public void setStreet(String street) {
-        this.street = street;
-    }
-
-    public Integer getNumber() {
-        return number;
-    }
-
-    public void setNumber(Integer number) {
-        this.number = number;
+    public void setStreetAndNumber(String street) {
+        this.streetAndNumber = street;
     }
 
     public AddressEntity() {

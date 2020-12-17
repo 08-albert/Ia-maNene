@@ -21,8 +21,8 @@ public class WebSecurityConfig  extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
-        http.authorizeRequests().antMatchers("/", "/login", "/register").permitAll();
-        http.authorizeRequests().antMatchers("/main/**")
+        http.authorizeRequests().antMatchers("/", "/login", "/register","login-submit","login-error").permitAll();
+        http.authorizeRequests().antMatchers()
                 .hasRole("ADMIN");
         http.authorizeRequests().anyRequest().authenticated();
 //        http.httpBasic();
@@ -42,8 +42,7 @@ public class WebSecurityConfig  extends WebSecurityConfigurerAdapter {
         auth.jdbcAuthentication().dataSource(dataSource).passwordEncoder(passwordEncoder());
     }
     @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+    public PasswordEncoder passwordEncoder() { return new BCryptPasswordEncoder();
+   }
 }
 

@@ -33,23 +33,7 @@ public class UserEntity {
     @OneToMany(mappedBy = "user")
     private List<CarEntity> cars;
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-    public List<CarEntity> getCars() {
-        return cars;
-    }
-
-    public void setCars(List<CarEntity> cars) {
-        this.cars = cars;
-    }
-
-    public UserEntity() {
-    }
+    public UserEntity() {}
 
     public Integer getUserId() {
         return userId;
@@ -57,30 +41,6 @@ public class UserEntity {
 
     public void setUserId(Integer userId) {
         this.userId = userId;
-    }
-
-    public List<RideEntity> getRides() {
-        return rides;
-    }
-
-    public void setRides(List<RideEntity> rides) {
-        this.rides = rides;
-    }
-
-    public Boolean getEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(Boolean enabled) {
-        this.enabled = enabled;
-    }
-
-    public List<AuthorityEntity> getAuthorities() {
-        return authorities;
-    }
-
-    public void setAuthorities(List<AuthorityEntity> authorities) {
-        this.authorities = authorities;
     }
 
     public String getEmail() {
@@ -107,6 +67,14 @@ public class UserEntity {
         this.dateOfBirth = dateOfBirth;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     public String getPassword() {
         return password;
     }
@@ -123,12 +91,44 @@ public class UserEntity {
         this.phoneNumber = phoneNumber;
     }
 
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+    }
+
     public String getSurname() {
         return surname;
     }
 
-    public void setSurname(String sureName) {
-        this.surname = sureName;
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public List<AuthorityEntity> getAuthorities() {
+        return authorities;
+    }
+
+    public void setAuthorities(List<AuthorityEntity> authorities) {
+        this.authorities = authorities;
+    }
+
+    public List<RideEntity> getRides() {
+        return rides;
+    }
+
+    public void setRides(List<RideEntity> rides) {
+        this.rides = rides;
+    }
+
+    public List<CarEntity> getCars() {
+        return cars;
+    }
+
+    public void setCars(List<CarEntity> cars) {
+        this.cars = cars;
     }
 }
 

@@ -1,39 +1,43 @@
 package com.sda.rideshare.entity;
 
-
-
 import javax.persistence.*;
 
 @Entity
 @Table(name = "authorities")
-
 public class AuthorityEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer authorityId;
     @Column(length = 50)
-    private Integer userId;
-
+    private String username;
+    @Column(length = 50)
     private String authority;
     @ManyToOne
-    @JoinColumn(name = "userId",insertable = false,updatable = false)
+    @JoinColumn(name = "user", insertable = false, updatable = false)
     private UserEntity user;
 
-    public AuthorityEntity() {
+    public Integer getAuthorityId() {
+        return authorityId;
     }
 
-    public Integer getUserId() {
-        return userId;
+    public void setAuthorityId(Integer authorityId) {
+        this.authorityId = authorityId;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getAuthority() {
         return authority;
     }
 
-    public void setAuthority(String authorities) {
-        this.authority = authorities;
+    public void setAuthority(String authority) {
+        this.authority = authority;
     }
 
     public UserEntity getUser() {
@@ -43,5 +47,4 @@ public class AuthorityEntity {
     public void setUser(UserEntity user) {
         this.user = user;
     }
-
 }
