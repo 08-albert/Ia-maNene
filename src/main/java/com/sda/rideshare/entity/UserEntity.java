@@ -1,5 +1,7 @@
 package com.sda.rideshare.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
@@ -13,11 +15,14 @@ public class UserEntity {
 
     private String email;
     private String name;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate dateOfBirth;
+    private String username;
     private String password;
     private String phoneNumber;
     private Boolean enabled;
-    private String sureName;
+    private String surname;
+
 
     @OneToMany(mappedBy = "user")
     private List<AuthorityEntity> authorities;
@@ -28,6 +33,13 @@ public class UserEntity {
     @OneToMany(mappedBy = "user")
     private List<CarEntity> cars;
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
     public List<CarEntity> getCars() {
         return cars;
     }
@@ -111,12 +123,12 @@ public class UserEntity {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getSureName() {
-        return sureName;
+    public String getSurname() {
+        return surname;
     }
 
-    public void setSureName(String sureName) {
-        this.sureName = sureName;
+    public void setSurname(String sureName) {
+        this.surname = sureName;
     }
 }
 
