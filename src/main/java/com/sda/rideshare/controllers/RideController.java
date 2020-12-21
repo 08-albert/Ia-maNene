@@ -52,7 +52,7 @@ public class RideController extends BaseController   {
         addressRepository.save(departureAddress);
         AddressEntity arrivalAddress = new AddressEntity();
         arrivalAddress.setCity(modelRide.getArrivalCity());
-        arrivalAddress.setCity(modelRide.getArrivalStreetAndNumber());
+        arrivalAddress.setStreetAndNumber(modelRide.getArrivalStreetAndNumber());
         addressRepository.save(arrivalAddress);
         rideEntity.setRideId(modelRide.getModelRideId());
         rideEntity.setDepartureAddress(departureAddress);
@@ -62,6 +62,11 @@ public class RideController extends BaseController   {
         rideEntity.setPassengerNumber(modelRide.getPassengerNumber());
         rideEntity.setUser(userEntity);
         rideRepository.save(rideEntity);
+        return modelAndView;
+    }
+    @GetMapping("/find-ride")
+    public ModelAndView getMainPage () {
+        ModelAndView modelAndView = new ModelAndView("find-ride");
         return modelAndView;
     }
     }
