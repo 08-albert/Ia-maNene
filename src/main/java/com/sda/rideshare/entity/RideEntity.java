@@ -25,12 +25,12 @@ public class RideEntity {
     private UserEntity user;
 
     @OneToOne
-    @JoinColumn(name ="addressIdDepartures" ,referencedColumnName = "addressId")
+    @JoinColumn(name ="cityDeparture" ,referencedColumnName = "city")
     private AddressEntity departureAddress;
 
 
     @OneToOne
-    @JoinColumn(name ="addressIdArrival",referencedColumnName = "addressId")
+    @JoinColumn(name ="cityArrival",referencedColumnName = "city")
     private AddressEntity arrivalAddress;
 
     public RideEntity() {
