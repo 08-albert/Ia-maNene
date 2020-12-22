@@ -57,8 +57,10 @@ public class RideController extends BaseController   {
         rideEntity.setRideId(modelRide.getModelRideId());
         rideEntity.setDepartureAddress(departureAddress);
         rideEntity.setArrivalAddress(arrivalAddress);
-        rideEntity.setDepartureDateAndTime(modelRide.getDepartureDateAndTime());
-        rideEntity.setArrivalDateAndTime(modelRide.getArrivalDateAndTime());
+
+        rideEntity.setDepartureDate(modelRide.getDepartureDate());
+        rideEntity.setDepartureTime(modelRide.getDepartureTime());
+        rideEntity.setArrivalTime(modelRide.getArrivalTime());
         rideEntity.setPassengerNumber(modelRide.getPassengerNumber());
         rideEntity.setUser(userEntity);
         rideRepository.save(rideEntity);

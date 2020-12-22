@@ -25,12 +25,16 @@
     <input type="text" id="arrivalStreet" name="arrivalStreet"  th:field="*{arrivalStreetAndNumber}">
     <br>
     <br>
-    <label for="departureDateAndTime">Ora de plecare</label>
-    <input type="datetime-local" id="departureDateAndTime" name="departureDateAndTime"  th:field="*{departureDateAndTime}">
+    <label for="departureDate">Data</label>
+    <input type="date" id="departureDate" name="departureDateAndTime"  th:field="*{departureDate}">
     <br>
     <br>
-    <label for="arrivalDateAndTime">Ora de sosire estimata</label>
-    <input type="datetime-local" id="arrivalDateAndTime" name="arrivalDateAndTime" th:field="*{arrivalDateAndTime}">
+    <label for="departureTime">Ora de plecare</label>
+    <input type="time" id="departureTime" name="departureDateAndTime"  th:field="*{departureTime}">
+    <br>
+    <br>
+    <label for="arrivalTime">Ora de sosire estimata</label>
+    <input type="time" id="arrivalTime" name="arrivalTime" th:field="*{arrivalTime}">
     <br>
     <br>
     <label for="passengerNumber">Numarul de pasageri</label>

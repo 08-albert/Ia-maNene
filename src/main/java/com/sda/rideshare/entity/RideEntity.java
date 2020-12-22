@@ -1,7 +1,11 @@
 package com.sda.rideshare.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Entity
 @Table(name = "rides")
@@ -9,8 +13,12 @@ public class RideEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer rideId;
-    private LocalDateTime departureDateAndTime;
-    private LocalDateTime arrivalDateAndTime;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private LocalDate departureDate;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
+    private LocalTime departureTime;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
+    private LocalTime arrivalTime;
     private Integer passengerNumber;
     @ManyToOne
     @JoinColumn(name = "userId")
@@ -28,14 +36,6 @@ public class RideEntity {
     public RideEntity() {
     }
 
-    public AddressEntity getDepartureAddress() {
-        return departureAddress;
-    }
-
-    public void setDepartureAddress(AddressEntity departureAddress) {
-        this.departureAddress = departureAddress;
-    }
-
     public Integer getRideId() {
         return rideId;
     }
@@ -44,20 +44,28 @@ public class RideEntity {
         this.rideId = rideId;
     }
 
-    public LocalDateTime getDepartureDateAndTime() {
-        return departureDateAndTime;
+    public LocalDate getDepartureDate() {
+        return departureDate;
     }
 
-    public void setDepartureDateAndTime(LocalDateTime departureDateAndTime) {
-        this.departureDateAndTime = departureDateAndTime;
+    public void setDepartureDate(LocalDate departureDate) {
+        this.departureDate = departureDate;
     }
 
-    public LocalDateTime getArrivalDateAndTime() {
-        return arrivalDateAndTime;
+    public LocalTime getDepartureTime() {
+        return departureTime;
     }
 
-    public void setArrivalDateAndTime(LocalDateTime arrivalDateAndTime) {
-        this.arrivalDateAndTime = arrivalDateAndTime;
+    public void setDepartureTime(LocalTime departureTime) {
+        this.departureTime = departureTime;
+    }
+
+    public LocalTime getArrivalTime() {
+        return arrivalTime;
+    }
+
+    public void setArrivalTime(LocalTime arrivalTime) {
+        this.arrivalTime = arrivalTime;
     }
 
     public Integer getPassengerNumber() {
@@ -74,6 +82,14 @@ public class RideEntity {
 
     public void setUser(UserEntity user) {
         this.user = user;
+    }
+
+    public AddressEntity getDepartureAddress() {
+        return departureAddress;
+    }
+
+    public void setDepartureAddress(AddressEntity departureAddress) {
+        this.departureAddress = departureAddress;
     }
 
     public AddressEntity getArrivalAddress() {

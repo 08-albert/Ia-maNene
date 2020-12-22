@@ -1,7 +1,10 @@
 package com.sda.rideshare.entity;
 
 import org.springframework.format.annotation.DateTimeFormat;
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 public class ModelRide {
     private Integer modelRideId;
@@ -11,29 +14,27 @@ public class ModelRide {
     private String arrivalStreetAndNumber;
     private String departureStreetAndNumber;
     private Integer passengerNumber;
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-    private LocalDateTime departureDateAndTime;
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-    private LocalDateTime arrivalDateAndTime;
+
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private LocalDate departureDate;
+
+    @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
+    private LocalTime departureTime;
+
+    @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
+    private LocalTime arrivalTime;
+
 
     public ModelRide() {
     }
-
-    public LocalDateTime getDepartureDateAndTime() {
-        return departureDateAndTime;
+    public LocalTime getArrivalTime() {
+        return arrivalTime;
     }
 
-    public void setDepartureDateAndTime(LocalDateTime departureDateAndTime) {
-        this.departureDateAndTime = departureDateAndTime;
+    public void setArrivalTime(LocalTime arrivalTime) {
+        this.arrivalTime = arrivalTime;
     }
 
-    public LocalDateTime getArrivalDateAndTime() {
-        return arrivalDateAndTime;
-    }
-
-    public void setArrivalDateAndTime(LocalDateTime arrivalDateAndTime) {
-        this.arrivalDateAndTime = arrivalDateAndTime;
-    }
 
     public Integer getModelRideId() {
         return modelRideId;
@@ -81,5 +82,21 @@ public class ModelRide {
 
     public void setPassengerNumber(Integer passengerNumber) {
         this.passengerNumber = passengerNumber;
+    }
+
+    public LocalDate getDepartureDate() {
+        return departureDate;
+    }
+
+    public void setDepartureDate(LocalDate departureDate) {
+        this.departureDate = departureDate;
+    }
+
+    public LocalTime getDepartureTime() {
+        return departureTime;
+    }
+
+    public void setDepartureTime(LocalTime departureTime) {
+        this.departureTime = departureTime;
     }
 }
