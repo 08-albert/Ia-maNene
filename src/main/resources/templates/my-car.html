@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Masina mea</h1>
+<table>
+<tr>
+    <th>Id</th>
+    <th>Car Make</th>
+    <th>Car Model</th>
+    <th>Plate Number</th>
+
+</tr>
+<tr th:each = " car : ${carList}">
+    <td th:text ="${car.getCarId()}"></td>
+    <td th:text ="${car.getCarMake()}"></td>
+    <td th:text ="${car.getCarModel()}"></td>
+    <td th:text ="${car.getPlateNumber()}">
+    </td>
+    <td>
+<!--        <a th:href ="@{'/products/edit/' + ${p.g etProductId()}}" th:text="#{edit}">Edit</a>-->
+        <a th:href ="@{'/delete-car/' + ${car.getCarId()}}">Sterge Masina</a>
+    </td>
+</tr>
+</table>
+<a href="/add-car">Adauga o masina</a>
+<br>
+<!--<a href="/delete-car">Sterge masina</a>-->
+</body>
+</html>
