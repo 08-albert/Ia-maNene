@@ -1,6 +1,6 @@
-package com.sda.rideshare.repository;
+package com.sda.rideshare.repositories;
 
-import com.sda.rideshare.entity.CarEntity;
+import com.sda.rideshare.entities.CarEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

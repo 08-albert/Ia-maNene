@@ -9,18 +9,19 @@
 <table>
 <tr>
     <th>Id</th>
-    <th>Car Make</th>
-    <th>Car Model</th>
-    <th>Plate Number</th>
+    <th>Marca</th>
+    <th>Modelul</th>
+    <th>Nr de inmatriculare</th>
 
 </tr>
-<tr th:each = " car : ${carList}">
+<tr th:each = " car : ${user.getCars()}">
     <td th:text ="${car.getCarId()}"></td>
     <td th:text ="${car.getCarMake()}"></td>
     <td th:text ="${car.getCarModel()}"></td>
     <td th:text ="${car.getPlateNumber()}">
     </td>
     <td>
+        <a th:href ="@{'/edit-car/' + ${car.getCarId()}}" > Modifica datele </a>
 <!--        <a th:href ="@{'/products/edit/' + ${p.g etProductId()}}" th:text="#{edit}">Edit</a>-->
         <a th:href ="@{'/delete-car/' + ${car.getCarId()}}">Sterge Masina</a>
     </td>

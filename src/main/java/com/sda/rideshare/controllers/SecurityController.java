@@ -1,8 +1,8 @@
 package com.sda.rideshare.controllers;
-import com.sda.rideshare.entity.AuthorityEntity;
-import com.sda.rideshare.entity.UserEntity;
-import com.sda.rideshare.repository.AuthorityRepository;
-import com.sda.rideshare.repository.UserRepository;
+import com.sda.rideshare.entities.AuthorityEntity;
+import com.sda.rideshare.entities.UserEntity;
+import com.sda.rideshare.repositories.AuthorityRepository;
+import com.sda.rideshare.repositories.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;

@@ -1,10 +1,9 @@
 package com.sda.rideshare.controllers;
 
-import com.sda.rideshare.entity.CarEntity;
-import com.sda.rideshare.entity.ModelRide;
-import com.sda.rideshare.entity.UserEntity;
-import com.sda.rideshare.repository.CarRepository;
-import com.sda.rideshare.repository.UserRepository;
+import com.sda.rideshare.entities.CarEntity;
+import com.sda.rideshare.entities.UserEntity;
+import com.sda.rideshare.repositories.CarRepository;
+import com.sda.rideshare.repositories.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,13 +56,26 @@ public class CarController extends BaseController {
     @GetMapping("/my-car")
     public ModelAndView getCars() {
         ModelAndView modelAndView = new ModelAndView("my-car");
-        modelAndView.addObject("carList", carRepository.findAll());
+        Optional<User> user = getLoggedInUser();
+        Integer id = null;
+        if (user.isPresent()) {
+            String username = user.get().getUsername();
+            UserEntity userEntity = userRepository.getUserByUsername(username);
+            id = userEntity.getUserId();
+        }
+        modelAndView.addObject("user", userRepository.findById(id).get());
         return modelAndView;
     }
     @GetMapping("delete-car/{id}")
     public ModelAndView deleteCategory (@PathVariable Integer id) {
         ModelAndView modelAndView = new ModelAndView("redirect:/my-car");
         carRepository.deleteById(id);
+        return modelAndView;
+    }
+    @GetMapping("/edit-car/{id}")
+    public ModelAndView editCategory (@PathVariable Integer id) {
+        ModelAndView modelAndView = new ModelAndView("car-form");
+        modelAndView.addObject("car", carRepository.findById(id).get());
         return modelAndView;
     }
 }

@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @Configuration
 @EntityScan("com.sda.rideshare")
-@EnableJpaRepositories("com.sda.rideshare.repository")
+@EnableJpaRepositories("com.sda.rideshare.repositories")
 public class DataBaseConfig {
 }

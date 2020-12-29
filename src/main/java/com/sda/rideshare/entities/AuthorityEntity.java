@@ -1,4 +1,4 @@
-package com.sda.rideshare.entity;
+package com.sda.rideshare.entities;
 
 import javax.persistence.*;
 

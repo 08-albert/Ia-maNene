@@ -1,9 +1,8 @@
-package com.sda.rideshare.entity;
+package com.sda.rideshare.entities;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 public class ModelRide {

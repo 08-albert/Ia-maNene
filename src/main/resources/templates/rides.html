@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table>
+    <tr>
+        <!--        <th>  Nr. Crt.</th>-->
+        <th > Orasul de plecare</th>
+        <th > Orasul de sosire</th>
+        <th > Data </th>
+    </tr>
+    <tr th:each = " ride : ${user.getRides()}">
+        <!--        <td th:text ="${ride.getRideId()}"></td> -->
+        <!--        cum sa fac sa imi faca o incrementare pe pagina a numerelor, nu direct din baza de date???-->
+        <td th:text ="${ride.getDepartureCity()}"></td>
+        <td th:text ="${ride.getArrivalCity()}"></td>
+        <td th:text ="${ride.getDepartureDate()}"></td>
+        <!--        <td>-->
+        <!--&lt;!&ndash;            <a th:href ="@{'/edit-car/' + ${car.getCarId()}}" > Modifica datele </a> <br>&ndash;&gt;-->
+        <!--&lt;!&ndash;            <a th:href ="@{'/delete-car/' + ${ride.getRideId()}}"> Sterge cursa </a>&ndash;&gt;-->
+        <!--        </td>-->
+    </tr>
+</table>
+<br>
+</body>
+</html>
