@@ -1,6 +1,7 @@
 package com.sda.rideshare.entities;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "cars")
@@ -8,7 +9,6 @@ public class CarEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer carId;
-
     private String carMake;
     private String carModel;
     private String plateNumber;
@@ -19,6 +19,16 @@ public class CarEntity {
     @JoinColumn(name = "userId")
     private UserEntity user;
 
+    @OneToMany(mappedBy = "carEntity", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<RideEntity> rides;
+
+    public List<RideEntity> getRides() {
+        return rides;
+    }
+
+    public void setRides(List<RideEntity> rides) {
+        this.rides = rides;
+    }
 
     public Integer getCarId() {
         return carId;

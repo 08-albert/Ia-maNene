@@ -8,10 +8,13 @@ public class AuthorityEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer authorityId;
+
     @Column(length = 50)
     private String username;
+
     @Column(length = 50)
     private String authority;
+
     @ManyToOne
     @JoinColumn(name = "user", insertable = false, updatable = false)
     private UserEntity user;

@@ -5,6 +5,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 @Entity
 @Table(name = "rides")
@@ -12,7 +13,6 @@ public class RideEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer rideId;
-
     private String departureCity;
     private String departureStreetAndNumber;
     private String arrivalCity;
@@ -20,14 +20,49 @@ public class RideEntity {
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate departureDate;
+
     @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
     private LocalTime departureTime;
+
     @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
     private LocalTime arrivalTime;
     private Integer passengerNumber;
+    private Integer availableSeats;
+
     @ManyToOne
     @JoinColumn(name = "userId")
     private UserEntity user;
+
+    @ManyToOne
+    @JoinColumn(name="carId")
+    private CarEntity carEntity;
+
+    @OneToMany(mappedBy = "ride")
+    private List<BookingEntity>bookingList;
+
+    public List<BookingEntity> getBookingList() {
+        return bookingList;
+    }
+
+    public void setBookingList(List<BookingEntity> bookingList) {
+        this.bookingList = bookingList;
+    }
+
+    public Integer getAvailableSeats() {
+        return availableSeats;
+    }
+
+    public void setAvailableSeats(Integer availableSeats) {
+        this.availableSeats = availableSeats;
+    }
+
+    public CarEntity getCarEntity() {
+        return carEntity;
+    }
+
+    public void setCarEntity(CarEntity carEntity) {
+        this.carEntity = carEntity;
+    }
 
     public String getDepartureCity() {
         return departureCity;
