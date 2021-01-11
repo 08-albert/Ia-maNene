@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -67,12 +68,24 @@ public class BookingController extends BaseController {
     @GetMapping("/booked-ride/{id}")
     public ModelAndView bookRide(@PathVariable Integer id) {
         ModelAndView modelAndView = new ModelAndView("booked-ride");
-        BookingEntity bookingEntity = bookingRepository.findById(id).get();
-        modelAndView.addObject("booking",bookingEntity);
-        RideEntity rideEntity = bookingEntity.getRide();
-        modelAndView.addObject("selectedRide",rideEntity);
+        RideEntity rideEntity = rideRepository.findById(id).get();
+        modelAndView.addObject("selectedRide", rideEntity);
         UserEntity userEntity = rideEntity.getUser();
-        modelAndView.addObject("selectedDriver",userEntity);
+        modelAndView.addObject("selectedDriver", userEntity);
+        List<BookingEntity> list = userEntity.getBookingList();
+        BookingEntity entity = userEntity.getBookingList().get(list.size() - 1);
+        modelAndView.addObject("booking", entity);
+        return modelAndView;
+    }
+    @GetMapping("/delete-booking/{id}")
+    public ModelAndView deleteBooking (@PathVariable Integer id) {
+        ModelAndView modelAndView = new ModelAndView("redirect:/my-rides");
+        BookingEntity bookingEntity = bookingRepository.findById(id).get();
+        RideEntity rideEntity = bookingEntity.getRide();
+        Integer newAvailableSeats = rideEntity.getAvailableSeats() + bookingEntity.getBookedSeats();
+        rideEntity.setAvailableSeats(newAvailableSeats);
+        rideRepository.save(rideEntity);
+        bookingRepository.deleteById(id);
         return modelAndView;
     }
 }

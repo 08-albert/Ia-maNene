@@ -3,6 +3,7 @@ package com.sda.rideshare.entities;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
@@ -13,11 +14,29 @@ public class RideEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer rideId;
+
+     @Pattern(regexp="^[a-zA-Z0-9 ]+$",message = "Date incorecte")
+    @NotBlank(message = "Campul nu poate fi gol!")
+    @Size(min = 3,max = 15,message = "Camp Invalid")
     private String departureCity;
+
+
+    @NotBlank(message = "Campul nu poate fi gol!")
+    @Size(min = 3,max = 20,message = "Camp Invalid")
     private String departureStreetAndNumber;
+
+
+    @Pattern(regexp="^[a-zA-Z0-9 ]+$",message = "Date incorecte")
+    @NotBlank(message = "Campul nu poate fi gol!")
+    @Size(min = 3,max = 10,message = "Camp Invalid")
     private String arrivalCity;
+
+
+    @NotBlank(message = "Campul nu poate fi gol!")
+    @Size(min = 3,max = 10,message = "Camp Invalid")
     private String arrivalStreetAndNumber;
 
+    @FutureOrPresent(message =" Camp Invalid")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate departureDate;
 
@@ -26,6 +45,11 @@ public class RideEntity {
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
     private LocalTime arrivalTime;
+
+    @NotNull(message = "Campul nu poate fi gol")
+    @Positive(message = "Date incorecte")
+    @Min (value = 1, message = "Numarul de locuri oferit trebuie sa fie minim 1.")
+    @Max(value = 7, message = "Numarul de locuri oferit nu poate depasi 7.")
     private Integer passengerNumber;
     private Integer availableSeats;
 

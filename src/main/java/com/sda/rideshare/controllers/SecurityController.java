@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 @Controller
 public class SecurityController {
@@ -36,14 +37,14 @@ public class SecurityController {
         return modelAndView;
     }
     @PostMapping("/register")
-    public ModelAndView registerUserRequest(@ModelAttribute("user") UserEntity userEntity, BindingResult bindingResult) {
+    public ModelAndView registerUserRequest(@Valid @ModelAttribute("user") UserEntity userEntity, BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView("redirect:/login");
-//       if(bindingResult.hasErrors()){
-//            modelAndView.setViewName("register");
-//            modelAndView.addObject("user", userEntity);
+       if(bindingResult.hasErrors()){
+            modelAndView.setViewName("register");
+            modelAndView.addObject("user", userEntity);
 //          modelAndView.addObject("editMode",  false);
-//            return modelAndView;
-////        }
+            return modelAndView;
+        }
 //        Optional<UserEntity> optionalUserEntity = userRepository.findById(userEntity.getUserId());
 //        if (optionalUserEntity.isPresent()) {
 //            UserEntity editedUserEntity = optionalUserEntity.get();
@@ -86,6 +87,7 @@ public class SecurityController {
         modelAndView.addObject("errorMessage", errorMessage);
         return modelAndView;
     }
+
 }
 
 

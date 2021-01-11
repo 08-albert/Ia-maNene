@@ -3,6 +3,7 @@ package com.sda.rideshare.entities;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -13,14 +14,30 @@ public class UserEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer userId;
 
+    @Email
     private String email;
+
+    @Pattern(regexp="^\\p{L}+(?: \\p{L}+)*$",message = "Date incorecte")
+    @NotBlank(message = "Campul nu poate fi gol!")
+    @Size(min = 3,max = 10,message = "Camp Invalid")
     private String name;
+
+    @Past(message = "Data introdusa este incorecta")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate dateOfBirth;
+
     private String username;
     private String password;
+
+    @NotNull(message = "Campul nu poate fi gol")
+    @Pattern(regexp = "[0-9]+",message = "nr invalid")
+    @Size(min = 10,max = 13,message = "Camp Invalid")
     private String phoneNumber;
     private Boolean enabled;
+
+    @Pattern(regexp="^\\p{L}+(?: \\p{L}+)*$",message = "Date incorecte")
+    @NotBlank(message = "Campul nu poate fi gol!")
+    @Size(min = 3,max = 10,message = "Camp Invalid")
     private String surname;
 
 

@@ -1,6 +1,9 @@
 package com.sda.rideshare.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
@@ -9,8 +12,18 @@ public class CarEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer carId;
+
+    @Pattern(regexp="^[A-Za-z]*$",message = "Camp Invalid")
+    @NotBlank(message = "Campul nu poate fi gol!")
+    @Size(min = 3,max = 10,message = "Camp Invalid")
     private String carMake;
+
+    @NotBlank(message = "Campul nu poate fi gol!")
+    @Size(min = 2,max = 15,message = "Camp Invalid")
     private String carModel;
+
+    @NotBlank(message = "Campul nu poate fi gol!")
+    @Size(min = 5,max = 10,message = "Camp Invalid")
     private String plateNumber;
 
 

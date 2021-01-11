@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.util.Optional;
 
 @Controller
@@ -41,8 +42,16 @@ public class CarController extends BaseController {
     }
 
     @PostMapping("/car-save")
-    public ModelAndView saveCar(@ModelAttribute("car") CarEntity carEntity, BindingResult bindingResult) {
+    public ModelAndView saveCar(@Valid @ModelAttribute("car") CarEntity carEntity, BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView("redirect:/my-car");
+
+        if(bindingResult.hasErrors()){
+            modelAndView.setViewName("car-form");
+            modelAndView.addObject("car",carEntity);
+            return modelAndView;
+
+        }
+
         Optional<User> user = getLoggedInUser();
         UserEntity userEntity = null;
         if (user.isPresent()) {

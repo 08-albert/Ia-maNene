@@ -1,5 +1,6 @@
 package com.sda.rideshare.controllers;
 import com.sda.rideshare.entities.*;
+import com.sda.rideshare.repositories.BookingRepository;
 import com.sda.rideshare.repositories.CarRepository;
 import com.sda.rideshare.repositories.RideRepository;
 import com.sda.rideshare.repositories.UserRepository;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -23,9 +25,10 @@ public class RideController extends BaseController {
     private RideRepository rideRepository;
     @Autowired
     private UserRepository userRepository;
-
     @Autowired
     private CarRepository carRepository;
+    @Autowired
+    private BookingRepository bookingRepository;
 
     @GetMapping("/rides/add")
     public ModelAndView addRide() {
@@ -37,14 +40,20 @@ public class RideController extends BaseController {
             UserEntity userEntity = userRepository.getUserByUsername(username);
             id = userEntity.getUserId();
         }
-        modelAndView.addObject("user",userRepository.findById(id).get());
+        modelAndView.addObject("user", userRepository.findById(id).get());
         modelAndView.addObject("modelRide", new RideEntity());
         return modelAndView;
     }
 
     @PostMapping("/rides/save")
-    public ModelAndView saveRide(@ModelAttribute("modelRide") RideEntity rideEntity, BindingResult bindingResult) {
+    public ModelAndView saveRide( @Valid @ModelAttribute("modelRide") RideEntity rideEntity, BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView("redirect:/main");
+        if (bindingResult.hasErrors()) {
+            modelAndView.setViewName("ride-form");
+            modelAndView.addObject("modelRide", rideEntity);
+
+            return modelAndView;
+        }
         Optional<User> user = getLoggedInUser();
         UserEntity userEntity = null;
         if (user.isPresent()) {
@@ -79,7 +88,9 @@ public class RideController extends BaseController {
 //                return modelAndView;
 //            }
 //        }
-        modelAndView.addObject("foundRides",rideRepository.getAllByDepartureCityAndAndArrivalCityAndDepartureDate(departureCity,arrivalCity,departureDate));
+        List<RideEntity>rides=rideRepository.getAllByDepartureCityAndAndArrivalCityAndDepartureDate(departureCity,arrivalCity,departureDate);
+        modelAndView.addObject("foundRides", rides);
+        rides.removeIf(ride -> ride.getAvailableSeats() <= 0);
         return modelAndView;
     }
 
@@ -111,12 +122,20 @@ public class RideController extends BaseController {
         return modelAndView;
     }
 
+//    @GetMapping("/delete-ride/{id}")
+//    public ModelAndView deleteRides(@PathVariable Integer id) {
+//        ModelAndView modelAndView = new ModelAndView("redirect:/view-rides");
+//        rideRepository.deleteById(id);
+//        return modelAndView;
+//    }
+
     @GetMapping("/delete-ride/{id}")
-    public ModelAndView deleteRides(@PathVariable Integer id) {
-        ModelAndView modelAndView = new ModelAndView("redirect:/view-rides");
+    public ModelAndView deleteRide(@PathVariable Integer id) {
+        ModelAndView modelAndView = new ModelAndView("redirect:/my-rides");
+        RideEntity rideEntity = rideRepository.findById(id).get();
+        List<BookingEntity> bookingList = rideEntity.getBookingList();
+        bookingRepository.deleteAll(bookingList);
         rideRepository.deleteById(id);
         return modelAndView;
     }
-
-
 }
