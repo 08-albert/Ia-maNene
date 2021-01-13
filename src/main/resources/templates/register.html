@@ -70,7 +70,7 @@
         <!--    <label for="username" class="visually-hidden">Nume de utilizator</label>-->
         <input type="text" id="username" name="username"  class="form-control" placeholder="Nume de utilizator" th:field="*{username}">
         <br>
-        <span style="color: red" th:if=" ${#fields.hasErrors('password')}"
+        <span style="color: red;color:yellow ;animation-duration: 4s" th:if=" ${#fields.hasErrors('password')}"
               th:each="err,stat:${#fields.errors('password')}"
               th:utext="!${stat.last}?${err} +'<br>' : ${err}">
     </span>
@@ -86,5 +86,17 @@
         <p class="mt-5 mb-3 text-muted" style="text-align: center">&copy; Ia-ma, nene - 2021</p>
     </footer>
 </main>
+<script>
+    $(function() {
+        $(document).ready(function () {
+            var todaysDate = new Date();
+            var year = todaysDate.getFullYear();
+            var month = ("0" + (todaysDate.getMonth() + 1)).slice(-2);
+            var day = ("0" + todaysDate.getDate()).slice(-2);
+            var maxDate = (year +"-"+ month +"-"+ day);
+            $('#dateOfBirth').attr('max',maxDate);
+        });
+    });
+</script>
 </body>
 </html>

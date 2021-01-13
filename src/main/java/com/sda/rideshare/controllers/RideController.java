@@ -48,20 +48,31 @@ public class RideController extends BaseController {
     @PostMapping("/rides/save")
     public ModelAndView saveRide( @Valid @ModelAttribute("modelRide") RideEntity rideEntity, BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView("redirect:/main");
-        if (bindingResult.hasErrors()) {
-            modelAndView.setViewName("ride-form");
-            modelAndView.addObject("modelRide", rideEntity);
 
+        if(bindingResult.hasErrors()) {
+            modelAndView.setViewName("ride-form");
+            Optional<User> user = getLoggedInUser();
+            UserEntity userEntity = null;
+            Integer id = null;
+            if (user.isPresent()) {
+                String username = user.get().getUsername();
+                userEntity = userRepository.getUserByUsername(username);
+                id = userEntity.getUserId();
+            }
+            rideEntity.setAvailableSeats(rideEntity.getPassengerNumber());
+            modelAndView.addObject("user", userRepository.findById(id).get());
+            modelAndView.addObject("modelRide", rideEntity);
             return modelAndView;
         }
+
         Optional<User> user = getLoggedInUser();
         UserEntity userEntity = null;
         if (user.isPresent()) {
             String username = user.get().getUsername();
             userEntity = userRepository.getUserByUsername(username);
         }
-        rideEntity.setAvailableSeats(rideEntity.getPassengerNumber());
 
+        rideEntity.setAvailableSeats(rideEntity.getPassengerNumber());
         rideEntity.setUser(userEntity);
         rideRepository.save(rideEntity);
         return modelAndView;

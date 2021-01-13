@@ -19,8 +19,11 @@
 <main class="form-signin">
     <form method="post" action="/login-submit">
         <img class="mb-4" src="/img/logo.png" alt="" width="72" height="57">
+
         <h1 class="h3 mb-3 fw-normal">Intra in cont</h1>
-        <div th:if = "${errorMessage}" style="text-align: center;color: #ff0000">
+        <div th:if = "${errorMessage}" style="text-align: center;color: red;
+"
+        >
             <span th:text="${errorMessage}"></span>
         </div>
         <label for="username" class="visually-hidden">Nume utilizator</label>

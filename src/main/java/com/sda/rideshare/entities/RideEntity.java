@@ -57,6 +57,7 @@ public class RideEntity {
     @JoinColumn(name = "userId")
     private UserEntity user;
 
+    @NotNull(message = "Vezi sectiunea 'Masina mea'")
     @ManyToOne
     @JoinColumn(name="carId")
     private CarEntity carEntity;

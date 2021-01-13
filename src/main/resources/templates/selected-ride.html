@@ -37,7 +37,7 @@
                th:value="${booking.getRideId() != null} ? ${booking.getRideId()} : ${selectedRide.getRideId()}"/>
     </label>
     <label for="bookedSeats"> Cate locuri doresti sa rezervi? </label><br>
-    <input type="number" id="bookedSeats" th:name="bookedSeats" >
+    <input type="number" id="bookedSeats" th:name="bookedSeats" th:min="1" th:max="${selectedRide.getAvailableSeats()}">
     <br>
     <br>
     <input type="submit" value="Salveaza" > <br>
